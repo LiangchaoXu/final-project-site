@@ -7,17 +7,8 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "./src/components lazy recursive ^\\.\\/.*\\.js$ referencedExports: default":
-/*!***************************************************************************************!*\
-  !*** ./src/components/ lazy ^\.\/.*\.js$ referencedExports: default namespace object ***!
-  \***************************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("var map = {\n\t\"./about.js\": [\n\t\t\"./src/components/about.js\",\n\t\t\"vendors-node_modules_handlebars_runtime_js\",\n\t\t\"src_components_about_js\"\n\t],\n\t\"./home.js\": [\n\t\t\"./src/components/home.js\",\n\t\t\"vendors-node_modules_handlebars_runtime_js\",\n\t\t\"src_components_home_js\"\n\t],\n\t\"./products.js\": [\n\t\t\"./src/components/products.js\",\n\t\t\"vendors-node_modules_handlebars_runtime_js\",\n\t\t\"src_components_products_js\"\n\t]\n};\nfunction webpackAsyncContext(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\treturn Promise.resolve().then(() => {\n\t\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\t\te.code = 'MODULE_NOT_FOUND';\n\t\t\tthrow e;\n\t\t});\n\t}\n\n\tvar ids = map[req], id = ids[0];\n\treturn Promise.all(ids.slice(1).map(__webpack_require__.e)).then(() => {\n\t\treturn __webpack_require__(id);\n\t});\n}\nwebpackAsyncContext.keys = () => (Object.keys(map));\nwebpackAsyncContext.id = \"./src/components lazy recursive ^\\\\.\\\\/.*\\\\.js$ referencedExports: default\";\nmodule.exports = webpackAsyncContext;\n\n//# sourceURL=webpack://assignment4/./src/components/_lazy_^\\.\\/.*\\.js$_referencedExports:_default_namespace_object?");
-
-/***/ }),
 
 /***/ "./src/index.js":
 /*!**********************!*\
@@ -25,7 +16,6 @@ eval("var map = {\n\t\"./about.js\": [\n\t\t\"./src/components/about.js\",\n\t\t
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router.js */ \"./src/router.js\");\n\n\nconst routes = [\n  { path: '/', component: 'home' },\n  { path: '/products', component: 'products' },\n  { path: '/about', component: 'about' },\n];\n\nnew _router_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"](routes);\n\n//# sourceURL=webpack://assignment4/./src/index.js?");
 
 /***/ }),
@@ -36,8 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _rou
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Router)\n/* harmony export */ });\nclass Router {\n  constructor(routes) {\n    this.routes = routes;\n    this.app = document.getElementById('app');\n    this.navigate(window.location.pathname);\n\n    window.addEventListener('popstate', () => {\n      this.navigate(window.location.pathname);\n    });\n\n    document.addEventListener('click', (event) => {\n      const link = event.target.closest('a[data-link]');\n      if (link) {\n        event.preventDefault();\n        const path = link.getAttribute('href');\n        this.navigate(path);\n      }\n    });\n  }\n\n  async navigate(path) {\n    const route = this.routes.find((r) => r.path === path) || this.routes.find((r) => r.path === '/');\n    history.pushState({}, '', path);\n    const { default: component } = await __webpack_require__(\"./src/components lazy recursive ^\\\\.\\\\/.*\\\\.js$ referencedExports: default\")(`./${route.component}.js`);\n    this.app.innerHTML = component.render();\n  }\n}\n\n//# sourceURL=webpack://assignment4/./src/router.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   initRouter: () => (/* binding */ initRouter),\n/* harmony export */   navigateTo: () => (/* binding */ navigateTo)\n/* harmony export */ });\nasync function navigateTo(route) {\n  let component;\n  switch (route.replace(/\\/$/, '')) { \n    case '':\n    case '/':\n    case '/liangchao-final-project-site':\n    case './home':\n    case '/home':\n      component = await Promise.all(/*! import() */[__webpack_require__.e(\"vendors-node_modules_handlebars_runtime_js\"), __webpack_require__.e(\"src_components_home_js\")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/home.js */ \"./src/components/home.js\"));\n      break;\n    case './products':\n    case '/products':\n      component = await Promise.all(/*! import() */[__webpack_require__.e(\"vendors-node_modules_handlebars_runtime_js\"), __webpack_require__.e(\"src_components_products_js\")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/products.js */ \"./src/components/products.js\"));\n      break;\n    case './about':\n    case '/about':\n      component = await Promise.all(/*! import() */[__webpack_require__.e(\"vendors-node_modules_handlebars_runtime_js\"), __webpack_require__.e(\"src_components_about_js\")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/about.js */ \"./src/components/about.js\"));\n      break;\n    default:\n      component = await Promise.all(/*! import() */[__webpack_require__.e(\"vendors-node_modules_handlebars_runtime_js\"), __webpack_require__.e(\"src_components_home_js\")]).then(__webpack_require__.bind(__webpack_require__, /*! ./components/home.js */ \"./src/components/home.js\"));\n      break;\n  }\n  component.default();\n}\n\nfunction initRouter() {\n  document.addEventListener('click', (e) => {\n    const target = e.target.closest('a[data-link]');\n    if (target) {\n      e.preventDefault();\n      const href = target.getAttribute('href');\n      history.pushState(null, null, href);\n      navigateTo(window.location.pathname);\n    }\n  });\n\n  window.addEventListener('popstate', () => {\n    navigateTo(window.location.pathname);\n  });\n}\n\n//# sourceURL=webpack://assignment4/./src/router.js?");
 
 /***/ })
 
@@ -181,7 +170,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/";
+/******/ 		__webpack_require__.p = "";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
